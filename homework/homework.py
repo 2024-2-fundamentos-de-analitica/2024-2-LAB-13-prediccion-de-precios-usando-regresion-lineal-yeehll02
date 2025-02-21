@@ -115,8 +115,7 @@ def optimize_hyperparameters(model, x_train, y_train):
 
     param_grid = {
         "feature_selection__k": range(1,12), 
-        "classifier__fit_intercept":[True,False],
-        'classifier__positive':[True,False]
+
               
     }
     search = GridSearchCV(model, param_grid, n_jobs=-1, cv=10, scoring="neg_mean_absolute_error", error_score="raise", refit=True )
@@ -185,6 +184,5 @@ best_model = optimize_hyperparameters(model, x_train, y_train)
 save_model(best_model)
 
 metrics_train, metrics_test = metrics(best_model, x_train, y_train, x_test, y_test)
-# cm_metrics_train, cm_metrics_test = confusion_matrix_metrics(best_model, x_train, y_train, x_test, y_test)
 save_metrics(metrics_train, metrics_test)
 
